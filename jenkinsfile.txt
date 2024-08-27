@@ -25,5 +25,11 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+
+        stage('Deploy')    {
+            steps {
+             deploy adapters: [tomcat9(credentialsId: 'adminfortom', path: '', url: 'http://3.111.198.235:8080/')], contextPath: '1-sampleapp', war: 'target/*war'
+            }
+        }
     }
 }
